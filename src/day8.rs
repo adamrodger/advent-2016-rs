@@ -42,21 +42,21 @@ fn build_grid(input: &[Instruction]) -> [[bool; 50]; 6] {
     for instruction in input {
         match instruction {
             Instruction::Rectangle { x, y } => {
-                for y in 0..*y {
+                (0..*y).for_each(|y| {
                     for x in 0..*x {
                         grid[y][x] = true;
                     }
-                }
+                });
             }
             Instruction::RotateRow { row, delta } => {
                 let current = grid[*row];
                 let mut next = [false; 50];
                 let len = next.len();
 
-                for i in 0..len {
+                (0..len).for_each(|i| {
                     let index = (i + delta + len) % len;
                     next[index] = current[i];
-                }
+                });
 
                 for (col, v) in next.iter().enumerate() {
                     grid[*row][col] = *v;
@@ -67,10 +67,10 @@ fn build_grid(input: &[Instruction]) -> [[bool; 50]; 6] {
                 let mut next = [false; 6];
                 let len = next.len();
 
-                for i in 0..len {
+                (0..len).for_each(|i| {
                     let index = (i + delta + len) % len;
                     next[index] = current[i];
-                }
+                });
 
                 for (row, v) in next.iter().enumerate() {
                     grid[row][*col] = *v;

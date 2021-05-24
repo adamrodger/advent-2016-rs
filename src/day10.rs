@@ -105,7 +105,7 @@ fn run(input: &[Instruction], part: &Part) -> usize {
     for instruction in input {
         match instruction {
             Instruction::Input(val, id) => {
-                bots.entry(*id).or_insert(Bot::default()).add_value(*val);
+                bots.entry(*id).or_insert_with(Bot::default).add_value(*val);
             }
             Instruction::Push { bot, low, high } => {
                 directions.insert(*bot, (low, high));
@@ -129,19 +129,19 @@ fn run(input: &[Instruction], part: &Part) -> usize {
 
         match low_dest {
             Destination::Bot(id) => {
-                bots.entry(*id).or_insert(Bot::default()).add_value(low);
+                bots.entry(*id).or_insert_with(Bot::default).add_value(low);
             }
             Destination::Output(id) => {
-                outputs.entry(*id).or_insert(Vec::new()).push(low);
+                outputs.entry(*id).or_insert_with(Vec::new).push(low);
             }
         }
 
         match high_dest {
             Destination::Bot(id) => {
-                bots.entry(*id).or_insert(Bot::default()).add_value(high);
+                bots.entry(*id).or_insert_with(Bot::default).add_value(high);
             }
             Destination::Output(id) => {
-                outputs.entry(*id).or_insert(Vec::new()).push(high);
+                outputs.entry(*id).or_insert_with(Vec::new).push(high);
             }
         }
 
@@ -150,7 +150,7 @@ fn run(input: &[Instruction], part: &Part) -> usize {
             if let Some(zero) = outputs.get(&0) {
                 if let Some(one) = outputs.get(&1) {
                     if let Some(two) = outputs.get(&2) {
-                        if zero.len() > 0 && one.len() > 0 && two.len() > 0 {
+                        if !zero.is_empty() && !one.is_empty() &!two.is_empty() {
                             return zero[0] * one[0] * two[0];
                         }
                     }
