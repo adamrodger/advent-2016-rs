@@ -150,7 +150,7 @@ fn run(input: &[Instruction], part: &Part) -> usize {
             if let Some(zero) = outputs.get(&0) {
                 if let Some(one) = outputs.get(&1) {
                     if let Some(two) = outputs.get(&2) {
-                        if !zero.is_empty() && !one.is_empty() &!two.is_empty() {
+                        if !zero.is_empty() && !one.is_empty() & !two.is_empty() {
                             return zero[0] * one[0] * two[0];
                         }
                     }
