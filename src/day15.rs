@@ -30,7 +30,10 @@ pub fn generator(input: &str) -> Vec<Disc> {
 #[aoc(day15, part1)]
 pub fn part1(input: &[Disc]) -> usize {
     for i in 0.. {
-        if input.iter().all(|disc| (disc.id + i + disc.position) % disc.size == 0) {
+        if input
+            .iter()
+            .all(|disc| (disc.id + i + disc.position) % disc.size == 0)
+        {
             return i;
         }
     }
@@ -45,7 +48,7 @@ pub fn part2(input: &[Disc]) -> usize {
     let extra = Disc {
         id: input.len() + 1,
         position: 0,
-        size: 11
+        size: 11,
     };
 
     input.push(extra);
