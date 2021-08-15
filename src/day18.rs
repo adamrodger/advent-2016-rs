@@ -24,9 +24,7 @@ fn calculate_safe_tiles(input: &str, iterations: usize) -> usize {
 
 /// Transform the current row into the next row
 fn transform(input: &[bool]) -> Vec<bool> {
-    (0..input.len())
-        .map(|i| is_trap(i, input))
-        .collect()
+    (0..input.len()).map(|i| is_trap(i, input)).collect()
 }
 
 /// Check if the next row at the given index should be a trap or not
