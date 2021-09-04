@@ -77,8 +77,18 @@ impl Point {
         }
     }
 
-    /// Get the 8 directional neighbours of a point
-    pub fn _neighbours(&self) -> [Point; 8] {
+    /// Get the 4 horizontal and vertical neighbours of a point
+    pub fn neighbours_4(&self) -> [Point; 4] {
+        [
+            Point::new(self.x, self.y - 1),
+            Point::new(self.x - 1, self.y),
+            Point::new(self.x + 1, self.y),
+            Point::new(self.x, self.y + 1),
+        ]
+    }
+
+    /// Get the 8 horizontal, vertical and diagonal neighbours of a point
+    pub fn _neighbours_8(&self) -> [Point; 8] {
         [
             Point::new(self.x - 1, self.y - 1),
             Point::new(self.x, self.y - 1),
