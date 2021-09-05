@@ -1,0 +1,41 @@
+cpy a d             // let d = a                    'a' comes from stdin
+cpy 14 c            // let c = 14
+cpy 182 b           // let b = 182
+                    //
+                    // while c > 0 {
+                    //     while b > 0 {
+inc d               //         d++
+dec b               //         b--
+jnz b -2            //     }
+dec c               //     c-
+jnz c -5            // }                            i.e.: d = a + (14 * 182)
+                    //
+                    // while true {
+cpy d a             //     let a = d
+                    //
+jnz 0 0             //     while a != 0 {
+cpy a b             // A:      let b = a
+cpy 0 a             //         let a = 0
+                    //         while true {
+cpy 2 c             //             let c = 2
+jnz b 2             //             while c != 0 {
+                    //                 if b == 0 {
+jnz 1 6             //                     goto B
+                    //                 }
+dec b               //                 b--
+dec c               //                 c--
+jnz c -4            //             }
+inc a               //             a++
+jnz 1 -7            //         }                    i.e. c = 2 - (a % 2); a /=2
+                    //
+cpy 2 b             // B:      let b = 2
+                    //         while c != 0 {
+jnz c 2             //
+jnz 1 4             //
+dec b               //             b--
+dec c               //             c--
+jnz 1 -4            //         }                    i.e. b = 2; b = b - c
+jnz 0 0             //                              i.e. b = 2 - c
+out b               //         print b
+jnz a -19           //     }
+jnz 1 -21           // }
